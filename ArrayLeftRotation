@@ -9,15 +9,24 @@ class Solution {
         this.rotation = rotation;
     }
     
-    public int[] leftRotate() {
-        for (int i = 0; i < rotation; i++) {
-            int temp = numbers[0];
-            for (int j = 1; j <= numbers.length - 1; j++) {
-                numbers[j - 1] = numbers[j];
+    public int[] rotateLeft() {
+        int[] newarr = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            if (-(rotation - (i - 0)) >= 0) {
+                newarr[i - rotation] = arr[i];
             }
-            numbers[numbers.length - 1] = temp;
+            else {
+                int temp = -(rotation - (i - 0));
+                if ((temp %= arr.length) == 0) {
+                    temp -= arr.length;
+                    newarr[arr.length + temp] = arr[i];
+                }
+                else {
+                    newarr[arr.length + temp] = arr[i];
+                }
+            }
         }
-        return numbers;
+        return newarr;
     }
 }
 
@@ -27,7 +36,7 @@ public class ArrayLeftRotation {
         int rotation = 1;
         System.out.println(Arrays.toString(
                 new Solution(testArray, rotation)
-                .leftRotate()
+                .rotateLeft()
             )
         );
     }
