@@ -1,28 +1,29 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 class Solution {
-    private int[] numbers;
     private int rotation;
+    private int[] numbers;
 
-    public Solution(int[] numbers, int rotation) {
-        this.numbers = numbers;
+    Solution(int rotation, int[] numbers) {
         this.rotation = rotation;
+        this.numbers = numbers;
     }
-    
-    public int[] rotateLeft() {
-        int[] newarr = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
+
+    int[] rotateLeft() {
+        int[] newarr = new int[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
             if (-(rotation - (i - 0)) >= 0) {
-                newarr[i - rotation] = arr[i];
+                newarr[i - rotation] = numbers[i];
             }
             else {
                 int temp = -(rotation - (i - 0));
-                if ((temp %= arr.length) == 0) {
-                    temp -= arr.length;
-                    newarr[arr.length + temp] = arr[i];
+                if ((temp %= numbers.length) == 0) {
+                    temp -= numbers.length;
+                    newarr[numbers.length + temp] = numbers[i];
                 }
                 else {
-                    newarr[arr.length + temp] = arr[i];
+                    newarr[numbers.length + temp] = numbers[i];
                 }
             }
         }
@@ -31,13 +32,23 @@ class Solution {
 }
 
 public class ArrayLeftRotation {
-    public static void main(String []args) {
-        int[] testArray = {3, 4, 5};
-        int rotation = 1;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] arr;
+        int n;
+        int rotation;
+        n = sc.nextInt();
+        rotation = sc.nextInt();
+        arr = new int[n];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = sc.nextInt();
+        }
+        long first = System.currentTimeMillis();
         System.out.println(Arrays.toString(
-                new Solution(testArray, rotation)
-                .rotateLeft()
-            )
-        );
-    }
+            new Solution(rotation, arr).rotateLeft()
+        ));
+        long now = System.currentTimeMillis();
+        System.out.println("Time taken: " + (now - first) / 1000f);
+        sc.close();
+    }    
 }
