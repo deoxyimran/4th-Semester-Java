@@ -5,12 +5,12 @@ class Solution {
     private int rotation;
     private int[] numbers;
 
-    Solution(int rotation, int[] numbers) {
+    public Solution(int rotation, int[] numbers) {
         this.rotation = rotation;
         this.numbers = numbers;
     }
 
-    int[] rotateLeft() {
+    public int[] rotateLeft() {
         int[] newarr = new int[numbers.length];
         for (int i = 0; i < numbers.length; i++) {
             if (-(rotation - (i - 0)) >= 0) {
